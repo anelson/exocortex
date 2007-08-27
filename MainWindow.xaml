@@ -5,6 +5,19 @@
     x:Class="ExoCortex.MainWindow"
     Title="ExoCortex 0.1" Height="712" Width="860"
     >
+	<Window.Resources>
+		<!-- El Cheapo hack to make images within disabled toolbar buttons appear 'grayed out'.  This doesn't
+		gray them at all, but lowers their opacity so the (usually gray) background of the button shows through.
+		If WPF had a built-in facility for grayscaling images in disabled buttons, this kind of icky kludgery wouldn't
+		be necessary -->
+		<Style TargetType="{x:Type Image}" x:Key="toolbarImageStyle">
+			<Style.Triggers>    
+				<DataTrigger Binding="{Binding RelativeSource={RelativeSource AncestorType={x:Type Button}, AncestorLevel=1}, Path=IsEnabled}" Value="False">
+        			<Setter Property="Opacity" Value="0.50"></Setter>
+    			</DataTrigger>
+			</Style.Triggers>
+		</Style>
+	</Window.Resources>
 	<DockPanel>
 		<ToolBarTray DockPanel.Dock="Top">
 			<ToolBar>
@@ -12,19 +25,19 @@
 			    	Command="ApplicationCommands.Cut" 
 			    	CommandTarget="{Binding ElementName=editor}"
 					ToolTip="Cut" x:Name="tbbCut" IsEnabled="True">
-			       <Image Source="Images\CutHS.png" Height="16"  />
+			       <Image Source="Images\CutHS.png" Height="16" Style="{StaticResource toolbarImageStyle}"  />
 			     </Button>
 			     <Button
 			    	Command="ApplicationCommands.Copy" 
 			    	CommandTarget="{Binding ElementName=editor}"
 					ToolTip="Copy" x:Name="tbbCopy">
-			       <Image Source="Images\CopyHS.png" Height="16"  />
+			       <Image Source="Images\CopyHS.png" Height="16" Style="{StaticResource toolbarImageStyle}"  />
 			     </Button>
 			     <Button
 			    	Command="ApplicationCommands.Paste" 
 			    	CommandTarget="{Binding ElementName=editor}"
 					ToolTip="Paste" x:Name="tbbPaste">
-			       <Image Source="Images\PasteHS.png" Height="16"  />
+			       <Image Source="Images\PasteHS.png" Height="16" Style="{StaticResource toolbarImageStyle}"  />
 			     </Button>
 				 
 				 <Separator />
@@ -33,13 +46,13 @@
 			    	Command="ApplicationCommands.Undo" 
 			    	CommandTarget="{Binding ElementName=editor}"
 					ToolTip="Undo" x:Name="tbbUndo">
-			       <Image Source="Images\Edit_UndoHS.png" Height="16"  />
+			       <Image Source="Images\Edit_UndoHS.png" Height="16" Style="{StaticResource toolbarImageStyle}"  />
 			     </Button>
 			     <Button
 			    	Command="ApplicationCommands.Redo" 
 			    	CommandTarget="{Binding ElementName=editor}"
 					ToolTip="Redo" x:Name="tbbRedo">
-			       <Image Source="Images\Edit_RedoHS.png" Height="16"  />
+			       <Image Source="Images\Edit_RedoHS.png" Height="16" Style="{StaticResource toolbarImageStyle}"  />
 			     </Button>
 			</ToolBar>
 			<ToolBar>
@@ -47,13 +60,13 @@
 					Command="EditingCommands.ToggleBold" 
 					CommandTarget="{Binding ElementName=editor}" 
 					ToolTip="Bold" x:Name="tbbBold">
-			       <Image Source="Images\BoldHS.png" Height="16"  />
+			       <Image Source="Images\BoldHS.png" Height="16" Style="{StaticResource toolbarImageStyle}"  />
 				</ToggleButton>
 			    <ToggleButton 
 					Command="EditingCommands.ToggleItalic" 
 					CommandTarget="{Binding ElementName=editor}" 
 					ToolTip="Italics" x:Name="tbbItalic">
-			       <Image Source="Images\ItalicHS.png" Height="16"  />
+			       <Image Source="Images\ItalicHS.png" Height="16" Style="{StaticResource toolbarImageStyle}"  />
 				</ToggleButton>
 			     <ToggleButton 
 			    	Command="EditingCommands.ToggleUnderline" 
@@ -64,11 +77,11 @@
 				 
 				<Button Command="EditingCommands.IncreaseFontSize"
 			    	CommandTarget="{Binding ElementName=editor}" ToolTip="Grow Font">
-					<Image Source="Images\CharacterGrowFont.png" Height="16"></Image>
+					<Image Source="Images\CharacterGrowFont.png" Height="16" Style="{StaticResource toolbarImageStyle}"></Image>
 				</Button>
 				<Button Command="EditingCommands.DecreaseFontSize"
 			    	CommandTarget="{Binding ElementName=editor}" ToolTip="Shrink Font">
-					<Image Source="Images\CharacterShrinkFont.png" Height="16"></Image>
+					<Image Source="Images\CharacterShrinkFont.png" Height="16" Style="{StaticResource toolbarImageStyle}"></Image>
 				</Button>
 				 
 				 <Separator />
@@ -77,54 +90,47 @@
 			    	Command="EditingCommands.ToggleBullets" 
 			    	CommandTarget="{Binding ElementName=editor}"
 					ToolTip="Toggle Bullets" x:Name="tbbBullets">
-			       <Image Source="Images\List_BulletsHS.png" Height="16" />
+			       <Image Source="Images\List_BulletsHS.png" Height="16" Style="{StaticResource toolbarImageStyle}" />
 			     </ToggleButton>
 			     <ToggleButton 
 			    	Command="EditingCommands.ToggleNumbering" 
 			    	CommandTarget="{Binding ElementName=editor}"
 					ToolTip="Toggle Numbering" x:Name="tbbNumbers">
-			       <Image Source="Images\List_NumberedHS.png" Height="16" />
+			       <Image Source="Images\List_NumberedHS.png" Height="16" Style="{StaticResource toolbarImageStyle}" />
 			     </ToggleButton>
 			     <Button
 			    	Command="EditingCommands.IncreaseIndentation" 
 			    	CommandTarget="{Binding ElementName=editor}"
 					ToolTip="Increase Indentation" x:Name="tbbIncreaseIndent">
-			       <Image Source="Images\IndentHS.png" Height="16"  />
+			       <Image Source="Images\IndentHS.png" Height="16" Style="{StaticResource toolbarImageStyle}"  />
 			     </Button>
 			     <Button
 			    	Command="EditingCommands.DecreaseIndentation" 
 			    	CommandTarget="{Binding ElementName=editor}"
 					ToolTip="Decrease Indentation" x:Name="tbbDecreaseIndent">
-			       <Image Source="Images\OutdentHS.png" Height="16" />
+			       <Image Source="Images\OutdentHS.png" Height="16" Style="{StaticResource toolbarImageStyle}" />
 			     </Button>
 				 
 				 <Separator />
 
 				<ToggleButton Command="EditingCommands.AlignLeft"
 			    	CommandTarget="{Binding ElementName=editor}" ToolTip="Align Left" x:Name="tbbAlignLeft">
-					<Image Source="Images\ParagraphLeftJustify.png" Height="16"></Image>
+					<Image Source="Images\ParagraphLeftJustify.png" Height="16" Style="{StaticResource toolbarImageStyle}"></Image>
 				</ToggleButton>
 				<ToggleButton Command="EditingCommands.AlignCenter"
 			    	CommandTarget="{Binding ElementName=editor}" ToolTip="Align Center" x:Name="tbbAlignCenter">
-					<Image Source="Images\ParagraphCenterJustify.png" Height="16"></Image>
+					<Image Source="Images\ParagraphCenterJustify.png" Height="16" Style="{StaticResource toolbarImageStyle}"></Image>
 				</ToggleButton>
 				<ToggleButton Command="EditingCommands.AlignRight"
 			    	CommandTarget="{Binding ElementName=editor}" ToolTip="Align Right" x:Name="tbbAlignRight">
-					<Image Source="Images\ParagraphRightJustify.png" Height="16"></Image>
+					<Image Source="Images\ParagraphRightJustify.png" Height="16" Style="{StaticResource toolbarImageStyle}"></Image>
 				</ToggleButton>
 				<ToggleButton Command="EditingCommands.AlignJustify"
 			    	CommandTarget="{Binding ElementName=editor}" ToolTip="Align Justify" x:Name="tbbAlignJustify">
-					<Image Source="Images\ParagraphFullJustify.png" Height="16"></Image>
+					<Image Source="Images\ParagraphFullJustify.png" Height="16" Style="{StaticResource toolbarImageStyle}"></Image>
 				</ToggleButton>
-				
-			     <Button
-					ToolTip="Test" x:Name="testButton" IsEnabled="False">
-					<TextBlock xml:space="preserve">Test button <Image Source="Images\OutdentHS.png" Height="16" IsEnabled="False" /></TextBlock>
-			       
-			     </Button>
 			</ToolBar>
 		</ToolBarTray>
-		
 		<ExoCortex:PageEditor x:Name="editor" Width="Auto" Height="Auto" DockPanel.Dock="Bottom" SelectionChanged="editor_SelectionChanged"/>
 	</DockPanel>
 </Window>

@@ -1,0 +1,79 @@
+﻿<Page
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    Title="Scrap"
+    >
+	<Page.Resources>
+		<BitmapImage x:Key="originalImage" UriSource="Images\OutdentHS.png" />
+		<FormatConvertedBitmap x:Key="grayImage" DestinationFormat="Gray8" Source="{StaticResource originalImage}" />
+	</Page.Resources>
+	<Page.Background>
+		<SolidColorBrush Color="{DynamicResource {x:Static SystemColors.ControlColorKey}}"/>
+	</Page.Background>
+		<ToolBarTray Orientation="Vertical">
+		<ToolBar>
+			<TextBlock>
+				This is a plain Image : 
+				<Button><Image Source="Images\OutdentHS.png" Height="16" />
+				</Button>
+			</TextBlock>
+			<TextBlock>
+				This is a plain Image loaded from a BitmapImage : 
+				<Button>
+				<Image Height="16">
+					<Image.Source>
+						<BitmapImage UriSource="Images\OutdentHS.png" />
+					</Image.Source>
+				</Image>
+				</Button>
+			</TextBlock>
+			<TextBlock>
+				This is a grayed Image loaded from a BitmapImage : 
+				<Button IsEnabled="false">
+				<Image Height="16">
+					<Image.Source>
+						<FormatConvertedBitmap DestinationFormat="Gray8">
+							<FormatConvertedBitmap.Source>
+								<BitmapImage UriSource="Images\OutdentHS.png" />
+							</FormatConvertedBitmap.Source>
+						</FormatConvertedBitmap>
+					</Image.Source>
+				</Image>
+				</Button>
+			</TextBlock>
+			<TextBlock>
+				This is a the original image, as a resource
+				<Button>
+				<Image Source="{StaticResource originalImage}" Height="16" />
+				</Button>
+			</TextBlock>
+			<TextBlock>
+				This is a the grayed image image, as a resource
+				<Button IsEnabled="false">
+				<Image Source="{StaticResource grayImage}" Height="16" />
+				</Button>
+			</TextBlock>
+			<TextBlock>
+				This is a grayed Image loaded from a BitmapImage, with an opacity mask : 
+				<Button IsEnabled="false">
+				<Image Height="16">
+					<Image.Source>
+						<FormatConvertedBitmap DestinationFormat="Gray32Float">
+							<FormatConvertedBitmap.Source>
+								<BitmapImage UriSource="Images\OutdentHS.png" />
+							</FormatConvertedBitmap.Source>
+						</FormatConvertedBitmap>
+					</Image.Source>
+					<Image.OpacityMask>
+						<ImageBrush>
+							<ImageBrush.ImageSource>
+								<BitmapImage UriSource="Images\OutdentHS.png" />
+							</ImageBrush.ImageSource>
+						</ImageBrush>
+					</Image.OpacityMask>
+				</Image>
+				</Button>
+			</TextBlock>
+		</ToolBar>
+	</ToolBarTray>
+</Page>

@@ -37,6 +37,10 @@
     <DefineConstants>TRACE</DefineConstants>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Draft.PresentationDesignMarkup, Version=0.0.4030.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\Program Files\Microsoft Visual Studio 8\Common7\IDE\Cider\Draft.PresentationDesignMarkup.DLL</HintPath>
+    </Reference>
     <Reference Include="mscorlib" />
     <Reference Include="System" />
     <Reference Include="System.Data" />
@@ -57,6 +61,7 @@
     <Page Include="MainWindow.xaml" />
     <Page Include="PageEditor.xaml" />
     <Page Include="RichTest.xaml" />
+    <Page Include="Scrap.xaml" />
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
